@@ -26,7 +26,7 @@ public class comodities_adapter extends RecyclerView.Adapter<comodities_adapter.
     }
 
     private final adaptateronclickhandler mclickHandler;
-    private int numberitems= allofthem.length;
+
     String specmin;
 
 
@@ -58,28 +58,23 @@ public class comodities_adapter extends RecyclerView.Adapter<comodities_adapter.
    @Override
     public myviewholder onCreateViewHolder (ViewGroup viewgroup, int numbervier){
       Context context = viewgroup.getContext();
-      int iditem = R.layout.list_comodities;
+
        LayoutInflater inflater= LayoutInflater.from(context);
 
-       boolean attachimediately = false;
-
-       View view = inflater.inflate(iditem, viewgroup, attachimediately);
+       View view = inflater.inflate(R.layout.list_comodities, viewgroup, false);
 
        return new myviewholder(view);
    }
    @Override
     public  void onBindViewHolder(myviewholder holder, int position) {
-       String weatherForThisDay = allofthem[position];
-       holder.comtextview.setText(weatherForThisDay);
+       String initInfo = allofthem[position];
+       holder.comtextview.setText(initInfo);
 
-       specmin = weatherForThisDay;
+       specmin = initInfo;
    }
    @Override
 
-    public int getItemCount (){return numberitems;}
+    public int getItemCount (){return allofthem.length;}
 
-    public void setcomoiries(String[] mydata) {
-        allofthem=mydata;
-        notifyDataSetChanged();
-    }
+
 }
