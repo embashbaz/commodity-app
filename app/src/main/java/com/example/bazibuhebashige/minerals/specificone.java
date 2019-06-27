@@ -86,8 +86,8 @@ public class specificone extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             TextView textView = findViewById(R.id.textview);
-
-            textView.setText(s);
+            networkadapter.getDatafromJson(s);
+            textView.setText(Commo.data);
 
 
         }

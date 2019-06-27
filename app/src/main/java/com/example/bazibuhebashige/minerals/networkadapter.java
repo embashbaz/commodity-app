@@ -3,10 +3,14 @@ package com.example.bazibuhebashige.minerals;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class networkadapter {
@@ -56,6 +60,43 @@ public class networkadapter {
         finally {
             connect.disconnect();
         }
+
+    }
+    public static void getDatafromJson(String json){
+        String detail="dataset";
+        String name="name";
+        String description="description";
+        String updatetime="refreshed_at";
+        String lastAvData="newest_available_date";
+        String id="id";
+        String data="data";
+
+
+        try {
+            JSONObject alldata = new JSONObject(json);
+            JSONObject Mydata = alldata.getJSONObject(detail);
+            JSONArray detailArray = Mydata.getJSONArray(data);
+            String[] col = new String[7];
+
+            for(int i=0;i<5;i++){
+                if(i==0){
+                    for(int j=0;j<=1;j++){
+                        if(j==0){
+                            col[j] = detailArray.getJSONArray(j).toString();
+                        }
+                    }
+                }
+            }
+            new Commo(Mydata.getString(id),col,
+                    Mydata.getString(name),Mydata.getString(description),
+                    Mydata.getString(updatetime),Mydata.getString(lastAvData));
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 
