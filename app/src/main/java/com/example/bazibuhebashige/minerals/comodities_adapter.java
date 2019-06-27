@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import static android.content.ContentValues.TAG;
-import static com.example.bazibuhebashige.minerals.products.allofthem;
+import static com.example.bazibuhebashige.minerals.products.someofthem;
 
 
 
@@ -49,7 +49,7 @@ public class comodities_adapter extends RecyclerView.Adapter<comodities_adapter.
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            String specific = allofthem[adapterPosition];
+            String specific = someofthem[adapterPosition][0];
             mclickHandler.onClick(specific);
         }
        }
@@ -67,14 +67,14 @@ public class comodities_adapter extends RecyclerView.Adapter<comodities_adapter.
    }
    @Override
     public  void onBindViewHolder(myviewholder holder, int position) {
-       String initInfo = allofthem[position];
+       String initInfo = someofthem[position][0];
        holder.comtextview.setText(initInfo);
 
        specmin = initInfo;
    }
    @Override
 
-    public int getItemCount (){return allofthem.length;}
+    public int getItemCount (){return someofthem.length;}
 
 
 }

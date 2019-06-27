@@ -12,12 +12,12 @@ import java.util.Scanner;
 public class networkadapter {
  public networkadapter(){}
 
-    public static final String BASE_URL="https://www.quandl.com/api/v3/datasets/MWCS.json";
+
     public static  final String KEY = "api_key";
     public static  final String QUERY_KEY = "q" ;
     public static  final String KEY_API = "5Mqx8cJ2ni3zxMQYEEem";
 
-    public static URL buildlUrl() {
+    public static URL buildlUrl(String BASE_URL) {
 
         URL url = null;
         Uri uri = Uri.parse(BASE_URL).buildUpon()

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements adaptateronclickh
 
     comodities_adapter comodities;
     RecyclerView myapp;
-    private static int size = allofthem.length;
+
 
 
     @Override
@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity implements adaptateronclickh
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         myapp.setLayoutManager(layoutManager);
 
-        myapp.setHasFixedSize(true);
+        //myapp.setHasFixedSize(true);
 
         comodities = new comodities_adapter(this);
-
         myapp.setAdapter(comodities);
 
     }
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements adaptateronclickh
          public void onClick(String specmin) {
 
         Intent intent = new Intent(this, specificone.class);
-        intent.putExtra(Intent.EXTRA_TEXT, specmin);
+        intent.putExtra(specificone.SPEC, specmin);
         startActivity(intent);
     }
 

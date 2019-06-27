@@ -13,22 +13,28 @@ import java.net.URL;
 
 public class specificone extends AppCompatActivity {
 
-    String actualdata;
+    public static String actualdata;
+    public static  String INIT_URL="https://www.quandl.com/api/v3/datasets/";
+    public static   String pCode=null;
+    public static String SPEC="SPEC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specificone);
 
-        Intent intent = getIntent();
+        Bundle intent = getIntent().getExtras();
 
         TextView textview = findViewById(R.id.textview);
 
         if (intent != null) {
-            if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-                actualdata = intent.getStringExtra(Intent.EXTRA_TEXT);
+            //if (intent.hasExtra(SPEC)) {
+                actualdata = intent.getString(SPEC);
+                pCode = products.dataCode(actualdata);
+                String BASE_URL = INIT_URL+pCode+".json";
+
                 try {
-                    URL url = networkadapter.buildlUrl();
+                    URL url = networkadapter.buildlUrl(BASE_URL);
 
                     new bookquery().execute(url);
 
@@ -36,7 +42,7 @@ public class specificone extends AppCompatActivity {
                     Log.d("error", e.getMessage());
                 }
                 textview.setText(actualdata);
-            }
+            //}
         }
         textview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
