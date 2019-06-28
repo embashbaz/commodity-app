@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.net.URL;
@@ -17,15 +18,17 @@ public class specificone extends AppCompatActivity {
     public static  String INIT_URL="https://www.quandl.com/api/v3/datasets/";
     public static   String pCode=null;
     public static String SPEC="SPEC";
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specificone);
 
-        Bundle intent = getIntent().getExtras();
+        progressBar = findViewById(R.id.progressBar);
 
-        TextView textview = findViewById(R.id.textview);
+
+        Bundle intent = getIntent().getExtras();
 
         if (intent != null) {
             //if (intent.hasExtra(SPEC)) {
@@ -41,10 +44,10 @@ public class specificone extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d("error", e.getMessage());
                 }
-                textview.setText(actualdata);
+
             //}
         }
-        textview.setOnClickListener(new View.OnClickListener() {
+      /**  textview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String lien = "https://www.google.com/search?q=";
                 Uri googlesearch = Uri.parse(lien + "stock price of " + actualdata);
@@ -59,7 +62,7 @@ public class specificone extends AppCompatActivity {
             }
 
 
-        });
+        });**/
     }
 
     public class bookquery extends AsyncTask<URL, Void, String> {
@@ -81,13 +84,32 @@ public class specificone extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected void onPostExecute(String s) {
-            TextView textView = findViewById(R.id.textview);
-            networkadapter.getDatafromJson(s);
-            textView.setText(Commo.data);
+            TextView description = findViewById(R.id.description);
+            TextView data = findViewById(R.id.data);
+            TextView error = findViewById(R.id.textView);
+
+            if(s==null)
+                error.setVisibility(View.VISIBLE);
+            else {
+                progressBar.setVisibility(View.INVISIBLE);
+
+                networkadapter.getDatafromJson(s);
+
+                String descript = "Name: " + Commo.name + "\n\n" +
+                        "Description: " + Commo.description + "\n\n" +
+                        "Last refreshed on " + Commo.updatetime;
+                String details = "Data from " + Commo.lastAvData + "\n" + "Price: " + Commo.data;
+
+
+                description.setText(descript);
+                data.setText(details);
+            }
 
 
         }

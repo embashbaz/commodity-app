@@ -76,17 +76,24 @@ public class networkadapter {
             JSONObject alldata = new JSONObject(json);
             JSONObject Mydata = alldata.getJSONObject(detail);
             JSONArray detailArray = Mydata.getJSONArray(data);
-            String[] col = new String[7];
+            JSONArray rawArray;
+            String col = null;
+
+            double y;
 
             for(int i=0;i<5;i++){
+
                 if(i==0){
-                    for(int j=0;j<=1;j++){
-                        if(j==0){
-                            col[j] = detailArray.getJSONArray(j).toString();
+                    rawArray = detailArray.getJSONArray(i);
+                    for(int j=1;j<=1;j++){
+                        if(j==1){
+                            y = rawArray.getDouble(j);
+                            col = Double.toString(y);
                         }
                     }
                 }
             }
+
             new Commo(Mydata.getString(id),col,
                     Mydata.getString(name),Mydata.getString(description),
                     Mydata.getString(updatetime),Mydata.getString(lastAvData));

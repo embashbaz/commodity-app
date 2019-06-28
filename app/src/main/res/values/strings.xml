@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">minerals</string>
+    <string name="app_name">Price ommodity app</string>
     <string name="TEXT">CLICK ON THE PRODUCT TO SEE THE PRICE</string>
+    <string name="error_loading">Error loading, check your internet connection</string>
 </resources>
