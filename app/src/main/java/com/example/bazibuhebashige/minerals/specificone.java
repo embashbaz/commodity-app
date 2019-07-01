@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,6 +26,8 @@ public class specificone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specificone);
+
+
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -93,11 +97,17 @@ public class specificone extends AppCompatActivity {
             TextView description = findViewById(R.id.description);
             TextView data = findViewById(R.id.data);
             TextView error = findViewById(R.id.textView);
+            CardView card1 = findViewById(R.id.cardView1);
+            CardView card2 = findViewById(R.id.card_view);
 
-            if(s==null)
+            if(s==null) {
+                progressBar.setVisibility(View.INVISIBLE);
                 error.setVisibility(View.VISIBLE);
+            }
             else {
                 progressBar.setVisibility(View.INVISIBLE);
+                card1.setVisibility(View.VISIBLE);
+                card2.setVisibility(View.VISIBLE);
 
                 networkadapter.getDatafromJson(s);
 
